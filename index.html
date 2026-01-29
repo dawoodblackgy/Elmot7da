@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,14 +12,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
-            --navy: #a82509;
-            --royal-blue: #861e07;
-            --light-blue: #d17c3d;
-            --gold: #ffffff;
-            --gold-light: #ffffff;
+            --navy: #180602;
+            --gold: #ffffffe0;
+            --gold-light: #d1803d;
             --white: #ffffff;
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -32,14 +30,19 @@
             color: var(--white);
             overflow: hidden;
             height: 100vh;
+            /* On mobile, 100vh can be tricky. A fallback could be needed if issues arise. */
             position: relative;
         }
 
         .presentation {
             width: 100%;
-            height: 100vh;
+            height: 100%;
             position: relative;
             overflow: hidden;
+        }
+
+        .slide::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
         }
 
         .slide {
@@ -50,13 +53,15 @@
             left: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Align to top for scrolling */
             align-items: center;
-            padding: 2rem;
+            padding: 0; /* Padding is now handled by the inner wrapper */
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.6s ease, transform 0.6s ease;
             pointer-events: none;
+            overflow-y: auto; /* Allow vertical scrolling */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
         }
 
         .slide.active {
@@ -119,8 +124,8 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 3rem 2rem;
-            max-width: 900px;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            max-width: 800px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             position: relative;
@@ -145,7 +150,7 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(1.75rem, 6vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
@@ -157,7 +162,7 @@
         }
 
         h2 {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: clamp(1.3rem, 5vw, 2.2rem);
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--gold);
@@ -165,21 +170,21 @@
         }
 
         h3 {
-            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-size: clamp(1.1rem, 4vw, 1.8rem);
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--light-blue);
         }
 
         .subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
             color: rgba(255, 255, 255, 0.8);
             text-align: center;
             margin-bottom: 0.5rem;
         }
 
         .tagline {
-            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
             color: var(--gold-light);
             text-align: center;
             font-weight: 300;
@@ -190,6 +195,18 @@
         .content {
             position: relative;
             z-index: 1;
+            width: 100%;
+        }
+
+        .slide-inner {
+            margin: auto;
+            width: 100%;
+            padding: 2rem clamp(1rem, 5vw, 2rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100%;
         }
 
         ul {
@@ -198,7 +215,7 @@
         }
 
         li {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             padding: 0.8rem 0;
             padding-right: 2rem;
             position: relative;
@@ -236,37 +253,38 @@
             background: linear-gradient(135deg, rgba(134, 30, 7, 0.3), rgba(209, 124, 61, 0.2));
             border: 2px solid var(--gold);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 4vw, 2rem);
             margin: 2rem 0;
             text-align: center;
             box-shadow: 0 10px 40px rgba(189, 91, 29, 0.2);
         }
 
         .price {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 8vw, 3.5rem);
             font-weight: 900;
             color: var(--gold);
             margin: 1rem 0;
         }
 
         .price-label {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 0.5rem;
         }
 
         .payment-item {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1rem, 3vw, 1.2rem);
             padding: 1.5rem;
             margin: 1rem 0;
             background: var(--glass);
             border-radius: 15px;
             border: 1px solid var(--glass-border);
             font-weight: 600;
+            text-align: center;
         }
 
         .contact-info {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             margin: 1rem 0;
             text-align: center;
         }
@@ -284,8 +302,8 @@
         .cta-button {
             background: linear-gradient(135deg, var(--gold), var(--gold-light));
             border: none;
-            padding: 1.2rem 3rem;
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 3rem);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
             font-weight: 700;
             color: #4d1103;
             border-radius: 50px;
@@ -380,7 +398,7 @@
         }
 
         .intro-text {
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             line-height: 1.8;
             text-align: center;
             color: rgba(255, 255, 255, 0.9);
@@ -388,22 +406,32 @@
             margin: 0 auto;
         }
 
+        /* Slide-specific text size adjustments */
+        [data-slide="3"] .price,
+        [data-slide="4"] .price {
+            font-size: clamp(1.8rem, 7vw, 3rem);
+        }
+
+        [data-slide="3"] li,
+        [data-slide="4"] li,
+        [data-slide="5"] li {
+            font-size: clamp(0.8rem, 2.2vw, 1rem);
+        }
+
         @media (max-width: 768px) {
-            .glass-panel {
-                padding: 2rem 1.5rem;
-            }
-
             .arrow {
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
+                top: auto;
+                bottom: 1.5rem;
+                transform: translateY(0);
             }
 
-            .arrow-right {
-                left: 1rem;
-            }
+            .arrow-right { left: 1.5rem; }
+            .arrow-left { right: 1.5rem; }
 
-            .arrow-left {
-                right: 1rem;
+            .navigation {
+                bottom: 5.5rem; /* Move dots up to make space for arrows */
             }
 
             .page-number {
@@ -414,6 +442,49 @@
 
         .counter {
             display: inline-block;
+        }
+
+        .welcome-text {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-align: center;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-left: 4px solid var(--gold);
+            width: 0;
+            max-width: 100%;
+            animation: typing 3.5s steps(40, end) forwards, blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            to { width: 30ch; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--gold); }
+        }
+
+        .main-logo {
+            width: clamp(140px, 25vw, 220px);
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid rgba(189, 91, 29, 0.3);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+            animation: floatLogo 6s ease-in-out infinite;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -434,74 +505,86 @@
     <div class="presentation" id="presentation">
         <!-- Slide 1: Cover -->
         <div class="slide active" data-slide="1">
-            <div class="content">
-                <h1>Quotation – GuardX fly</h1>
-                <p class="subtitle">شركة المتحدة – حلول الطاقة / المقاولات</p>
-                <p class="tagline">Let's fly together</p>
+            <div class="slide-inner">
+                <div class="content">
+                    <img src="https://www2.0zz0.com/2025/11/05/14/844445960.jpg" alt="GuardX fly logo" class="main-logo" loading="lazy">
+                    <div class="welcome-text">جارد إكس فلاي ترحب بالمتحدة</div>
+                    <h1>Quotation – GuardX fly</h1>
+                    <p class="subtitle">شركة المتحدة – حلول الطاقة / المقاولات</p>
+                    <p class="tagline">Let's fly together</p>
+                </div>
             </div>
         </div>
 
         <!-- Slide 2: Overview -->
         <div class="slide" data-slide="2">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>حلول تسويق وإنتاج رقمي متكاملة</h2>
-                    <p class="intro-text">
-                        GuardX fly هي وكالة تسويق رقمي متخصصة في تقديم حلول متكاملة تجمع بين الإبداع والتكنولوجيا. نحن نساعد الشركات على بناء حضور رقمي قوي من خلال استراتيجيات تسويقية مبتكرة وإنتاج محتوى مرئي احترافي يعكس هوية العلامة التجارية ويحقق أهدافها.
-                    </p>
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>حلول تسويق وإنتاج رقمي متكاملة</h2>
+                        <p class="intro-text">
+                            GuardX fly هي وكالة تسويق رقمي متخصصة في تقديم حلول متكاملة تجمع بين الإبداع والتكنولوجيا. نحن نساعد الشركات على بناء حضور رقمي قوي من خلال استراتيجيات تسويقية مبتكرة وإنتاج محتوى مرئي احترافي يعكس هوية العلامة التجارية ويحقق أهدافها.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Slide 3: Digital Marketing Package -->
         <div class="slide" data-slide="3">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>إدارة وتسويق رقمي متكامل</h2>
-                    <div class="price-card">
-                        <div class="price-label">الباقة الشهرية</div>
-                        <div class="price"><span class="counter" data-target="10000">0</span> جنيه</div>
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>إدارة وتسويق رقمي متكامل</h2>
+                        <div class="price-card">
+                            <div class="price-label">الباقة الشهرية</div>
+                            <div class="price">جنيه <span class="counter" data-target="10000">0</span></div>
+                        </div>
+                        <ul>
+                            <li>إنشاء وإدارة حسابات التواصل الاجتماعي</li>
+                            <li>الحملات الإعلانية الممولة</li>
+                            <li>SEO وكتابة المقالات</li>
+                            <li>تحليل البيانات والتقارير الذكية</li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li>إنشاء وإدارة حسابات التواصل الاجتماعي</li>
-                        <li>الحملات الإعلانية الممولة</li>
-                        <li>SEO وكتابة المقالات</li>
-                        <li>تحليل البيانات والتقارير الذكية</li>
-                    </ul>
                 </div>
             </div>
         </div>
 
         <!-- Slide 4: Visual Production Package -->
         <div class="slide" data-slide="4">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>الإنتاج المرئي والمحتوى الإبداعي</h2>
-                    <div class="price-card">
-                        <div class="price-label">الباقة الشهرية</div>
-                        <div class="price"><span class="counter" data-target="5000">0</span> جنيه</div>
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>الإنتاج المرئي والمحتوى الإبداعي</h2>
+                        <div class="price-card">
+                            <div class="price-label">الباقة الشهرية</div>
+                            <div class="price">جنيه <span class="counter" data-target="5000">0</span></div>
+                        </div>
+                        <ul>
+                            <li>تصوير سينمائي احترافي</li>
+                            <li>مونتاج وإعلانات وريـلز</li>
+                            <li>صناعة أفكار وسيناريوهات</li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li>تصوير سينمائي احترافي</li>
-                        <li>مونتاج وإعلانات وريـلز</li>
-                        <li>صناعة أفكار وسيناريوهات</li>
-                    </ul>
                 </div>
             </div>
         </div>
 
         <!-- Slide 5: Contract Summary -->
         <div class="slide" data-slide="5">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>ملخص التعاقد</h2>
-                    <div class="price-card">
-                        <ul style="text-align: right;">
-                            <li>أقل مدة تعاقد: 3 شهور</li>
-                            <li>مدة المشروع: 3 شهور</li>
-                            <li>التكلفة الإجمالية: <span class="counter" data-target="45000">0</span> جنيه</li>
-                            <li>ميزانية الإعلانات تحدد لاحقًا</li>
-                        </ul>
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>ملخص التعاقد</h2>
+                        <div class="price-card">
+                            <ul style="text-align: right;">
+                                <li>أقل مدة تعاقد: 3 شهور</li>
+                                <li>مدة المشروع: 3 شهور</li>
+                                <li>التكلفة الإجمالية: جنيه <span class="counter" data-target="45000">0</span></li>
+                                <li>ميزانية الإعلانات تحدد لاحقًا</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -509,14 +592,16 @@
 
         <!-- Slide 6: Payment Terms -->
         <div class="slide" data-slide="6">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>شروط الدفع</h2>
-                    <div class="payment-item">
-                        50% عند التعاقد
-                    </div>
-                    <div class="payment-item">
-                        50% بعد 10 أيام
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>شروط الدفع</h2>
+                        <div class="payment-item">
+                            50% عند التعاقد
+                        </div>
+                        <div class="payment-item">
+                            50% بعد 10 أيام
+                        </div>
                     </div>
                 </div>
             </div>
@@ -524,20 +609,22 @@
 
         <!-- Slide 7: Contact -->
         <div class="slide" data-slide="7">
-            <div class="glass-panel">
-                <div class="content">
-                    <h2>تواصل معنا</h2>
-                    <div class="contact-info">
-                        <p>📧 البريد الإلكتروني:</p>
-                        <p><a href="mailto:guardxfly@gmail.com">guardxfly@gmail.com</a></p>
-                    </div>
-                    <div class="contact-info">
-                        <p>📱 الهاتف:</p>
-                        <p><a href="tel:01115238909">01115238909</a></p>
-                    </div>
-                    <div class="contact-info">
-                        <p>🌐 الموقع الإلكتروني:</p>
-                        <p><a href="https://guardxfly.com" target="_blank">guardxfly.com</a></p>
+            <div class="slide-inner">
+                <div class="glass-panel">
+                    <div class="content">
+                        <h2>تواصل معنا</h2>
+                        <div class="contact-info">
+                            <p>📧 البريد الإلكتروني:</p>
+                            <p><a href="mailto:guardxfly@gmail.com">guardxfly@gmail.com</a></p>
+                        </div>
+                        <div class="contact-info">
+                            <p>📱 الهاتف:</p>
+                            <p><a href="tel:01115238909">01115238909</a></p>
+                        </div>
+                        <div class="contact-info">
+                            <p>🌐 الموقع الإلكتروني:</p>
+                            <p><a href="https://guardxfly.com" target="_blank">guardxfly.com</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -545,11 +632,13 @@
 
         <!-- Slide 8: Closing CTA -->
         <div class="slide" data-slide="8">
-            <div class="content">
-                <h1>ابدأ التحليق بعلامتك التجارية اليوم</h1>
-                <button class="cta-button" onclick="window.location.href='mailto:guardxfly@gmail.com'">
-                    تواصل معنا الآن
-                </button>
+            <div class="slide-inner">
+                <div class="content">
+                    <h1>ابدأ التحليق بعلامتك التجارية اليوم</h1>
+                    <button class="cta-button" onclick="window.open('https://wa.me/201115238909', '_blank')">
+                        تواصل معنا الآن
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -635,11 +724,23 @@
         // Mouse wheel navigation
         let scrollTimeout;
         document.addEventListener('wheel', (e) => {
+            // Check if current slide has internal scrolling
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide && activeSlide.scrollHeight > activeSlide.clientHeight) {
+                const atBottom = Math.abs(activeSlide.scrollHeight - activeSlide.clientHeight - activeSlide.scrollTop) < 2;
+                const atTop = activeSlide.scrollTop <= 0;
+                
+                // If scrolling down but not at bottom, or scrolling up but not at top, don't change slide
+                if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
+                    return;
+                }
+            }
+
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 if (e.deltaY > 0) nextSlide();
                 if (e.deltaY < 0) prevSlide();
-            }, 100);
+            }, 50); /* Reduced delay for faster navigation */
         }, { passive: true });
 
         // Counter animation
